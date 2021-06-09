@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallController : MonoBehaviour
+public class ObstacleController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,9 @@ public class WallController : MonoBehaviour
     private void OnCollisionEnter(Collision other) 
     {
             // Debug.Log("Bumped into a wall");
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            if(other.gameObject.CompareTag("Player")){
+                GetComponent<MeshRenderer>().material.color = Color.red;
+                gameObject.tag = "Obstacle";
+            }
     }
 }
