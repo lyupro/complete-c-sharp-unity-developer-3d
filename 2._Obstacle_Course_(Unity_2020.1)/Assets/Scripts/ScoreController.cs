@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallController : MonoBehaviour
+public class ScoreController : MonoBehaviour
 {
+
+    int hits = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class WallController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) 
     {
-            // Debug.Log("Bumped into a wall");
-            GetComponent<MeshRenderer>().material.color = Color.red;
+        hits++;
+        Debug.Log("You've bumped into a thing this many times: "+ hits);
     }
 }
