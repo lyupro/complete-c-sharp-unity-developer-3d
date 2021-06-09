@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DropController : MonoBehaviour
 {
+    [SerializeField] float timeToWait = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,8 @@ public class DropController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.time);
+        if(Time.time > timeToWait){
+            Debug.Log("3 seconds has elapsed");
+        }
     }
 }
