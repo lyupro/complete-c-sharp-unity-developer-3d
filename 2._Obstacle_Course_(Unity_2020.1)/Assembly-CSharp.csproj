@@ -40,6 +40,7 @@
      <Compile Include="Assets\Scripts\ScoreController.cs" />
      <Compile Include="Assets\Scripts\DropController.cs" />
      <Compile Include="Assets\Scripts\ObstacleController.cs" />
+     <Compile Include="Assets\Scripts\SpinnerController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
