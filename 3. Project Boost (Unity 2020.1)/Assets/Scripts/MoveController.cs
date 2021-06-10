@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-
     private float vertical = 0f;
     private float horizontal = 0f;
+
+    private bool isFly = false;
+
+    private Rigidbody _rb;
+
+    const float speedYMultiplier = 300f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -24,14 +29,12 @@ public class MoveController : MonoBehaviour
 
     void ProcessThrust()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android
+        || Input.GetKey(KeyCode.Space))
         {
-            vertical = Input.GetAxis("Vertical");
+            isFly = true;
         }else{
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Debug.Log("Pressed SPACE - Thrusting");
-            }
+            isFly = false;
         }
     }
 
@@ -44,12 +47,22 @@ public class MoveController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A))
             {
-                Debug.Log("Rotating Left");
+                horizontal = -1f;
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                Debug.Log("Rotating Right");
+                horizontal = 1f;
+            }else{
+                horizontal = 0f;
             }
+        }
+    }
+
+    void FixedUpdate() 
+    {
+        if(isFly)
+        {
+            _rb.AddRelativeForce(Vector3.up * speedYMultiplier * Time.fixedDeltaTime);
         }
     }
 }
