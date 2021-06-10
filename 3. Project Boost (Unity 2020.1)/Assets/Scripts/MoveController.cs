@@ -6,6 +6,7 @@ using UnityEngine;
 public class MoveController : MonoBehaviour
 {
     [SerializeField] private float speedY = 1000f;
+    [SerializeField] private float speedZ = 100f;
 
     private float vertical = 0f;
     private float horizontal = 0f;
@@ -41,21 +42,12 @@ public class MoveController : MonoBehaviour
 
     void ProcessRotation()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Input.GetKey(KeyCode.A))
         {
-            horizontal = Input.GetAxis("Horizontal");
-        }else
+            ApplyRotation(speedZ);
+        }else if (Input.GetKey(KeyCode.D))
         {
-            if (Input.GetKey(KeyCode.A))
-            {
-                horizontal = -1f;
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                horizontal = 1f;
-            }else{
-                horizontal = 0f;
-            }
+            ApplyRotation(-speedZ);
         }
     }
 
@@ -65,5 +57,10 @@ public class MoveController : MonoBehaviour
         {
             _rb.AddRelativeForce(Vector3.up * speedY * Time.fixedDeltaTime);
         }
+    }
+
+    void ApplyRotation(float rotationSpeed)
+    {
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
     }
 }
