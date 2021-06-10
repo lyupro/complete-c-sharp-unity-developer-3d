@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
+    [SerializeField] private float speedY = 1000f;
+
     private float vertical = 0f;
     private float horizontal = 0f;
 
@@ -12,7 +14,6 @@ public class MoveController : MonoBehaviour
 
     private Rigidbody _rb;
 
-    const float speedYMultiplier = 300f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +63,7 @@ public class MoveController : MonoBehaviour
     {
         if(isFly)
         {
-            _rb.AddRelativeForce(Vector3.up * speedYMultiplier * Time.fixedDeltaTime);
+            _rb.AddRelativeForce(Vector3.up * speedY * Time.fixedDeltaTime);
         }
     }
 }
