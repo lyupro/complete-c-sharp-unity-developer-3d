@@ -12,6 +12,7 @@ public class MoveController : MonoBehaviour
     private float horizontal = 0f;
 
     private bool isFly = false;
+    private bool isRotate = false;
 
     private Rigidbody _rb;
 
@@ -42,12 +43,16 @@ public class MoveController : MonoBehaviour
 
     void ProcessRotation()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Application.platform == RuntimePlatform.Android
+        || Input.GetKey(KeyCode.A)
+        || Input.GetKey(KeyCode.D)
+        )
         {
-            ApplyRotation(speedZ);
-        }else if (Input.GetKey(KeyCode.D))
+            isRotate = true;
+            horizontal = Input.GetAxis("Horizontal");
+        }else
         {
-            ApplyRotation(-speedZ);
+            isRotate = false;
         }
     }
 
@@ -57,10 +62,11 @@ public class MoveController : MonoBehaviour
         {
             _rb.AddRelativeForce(Vector3.up * speedY * Time.fixedDeltaTime);
         }
-    }
 
-    void ApplyRotation(float rotationSpeed)
-    {
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        if(isRotate)
+        {
+            // '-horizontal' due to invert A & D keys
+            transform.Rotate(new Vector3(0, 0, -horizontal * speedZ * Time.fixedDeltaTime));
+        }
     }
 }
