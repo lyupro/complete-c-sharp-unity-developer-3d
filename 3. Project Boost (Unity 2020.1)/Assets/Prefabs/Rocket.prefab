@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4717502291135176335}
   - component: {fileID: 4717502291135176334}
   - component: {fileID: 4717502290150330395}
-  - component: {fileID: 4717502290150330390}
   - component: {fileID: 4717502290150330396}
+  - component: {fileID: 4717502290150330390}
   - component: {fileID: 1292468185734299442}
   m_Layer: 0
   m_Name: Rocket
@@ -115,20 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!114 &4717502290150330390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4717502291135176333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f275c820ab5be3e449ec3a1c9cb3ba9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedY: 1000
-  speedZ: 100
 --- !u!82 &4717502290150330396
 AudioSource:
   m_ObjectHideFlags: 0
@@ -225,6 +211,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4717502290150330390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717502291135176333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f275c820ab5be3e449ec3a1c9cb3ba9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedY: 1000
+  speedZ: 100
+  mainEngine: {fileID: 0}
 --- !u!114 &1292468185734299442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,3 +238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bff15f2394a6b4f86481efd752ea2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLoadDelay: 2
+  soundSuccess: {fileID: 0}
+  soundCrash: {fileID: 0}

@@ -5,17 +5,26 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
+    // PARAMETERS - for tuning, typically set in the editor
+
+    // CACHE - e.g. references for readability or speed
+
+    // STATE - private instance (member) variables
+    
     [SerializeField] private float speedY = 1000f;
     [SerializeField] private float speedZ = 100f;
+    [SerializeField] private AudioClip mainEngine;
+
+
+    private Rigidbody _rb;
+    private AudioSource _as_Fly;
+
 
     private float vertical = 0f;
     private float horizontal = 0f;
 
     private bool isFly = false;
     private bool isRotate = false;
-
-    private Rigidbody _rb;
-    private AudioSource _as_Fly;
 
 
     // Start is called before the first frame update
@@ -40,7 +49,7 @@ public class MoveController : MonoBehaviour
             isFly = true;
             if (!_as_Fly.isPlaying)
             {
-                _as_Fly.Play();
+                _as_Fly.PlayOneShot(mainEngine);
             }
         }
         else
