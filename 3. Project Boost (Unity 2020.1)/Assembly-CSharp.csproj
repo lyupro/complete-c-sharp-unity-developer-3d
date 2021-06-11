@@ -638,6 +638,12 @@
     <Reference Include="UnityEngine.UI">
         <HintPath>J:/Unity/Projects/Complete C# Unity Developer 3D/3. Project Boost (Unity 2020.1)/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Beetlecircus.SerializableDictionary">
+        <HintPath>J:/Unity/Projects/Complete C# Unity Developer 3D/3. Project Boost (Unity 2020.1)/Library/ScriptAssemblies/Beetlecircus.SerializableDictionary.dll</HintPath>
+    </Reference>
+    <Reference Include="Beetlecircus.SerializableDictionary.Editor">
+        <HintPath>J:/Unity/Projects/Complete C# Unity Developer 3D/3. Project Boost (Unity 2020.1)/Library/ScriptAssemblies/Beetlecircus.SerializableDictionary.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
