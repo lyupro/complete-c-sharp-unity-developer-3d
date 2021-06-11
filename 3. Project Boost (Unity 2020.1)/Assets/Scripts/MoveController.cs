@@ -65,8 +65,12 @@ public class MoveController : MonoBehaviour
 
         if(isRotate)
         {
+            // Freezing rotation so we can manually rotate - FIXED BUG with in contact with other objects
+            _rb.freezeRotation = true;
             // '-horizontal' due to invert A & D keys
             transform.Rotate(new Vector3(0, 0, -horizontal * speedZ * Time.fixedDeltaTime));
+            // Unfreezing rotation so the phycisc system can take over
+            _rb.freezeRotation = false;
         }
     }
 }
