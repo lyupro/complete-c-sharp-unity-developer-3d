@@ -21,7 +21,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You picked up fuel");
                 break;
             default:
-                ReloadLevel();
+                Invoke("ReloadLevel", 1f);
                 Debug.Log("Sorry, you blew up!");
                 break;
         }
