@@ -15,12 +15,14 @@ public class MoveController : MonoBehaviour
     private bool isRotate = false;
 
     private Rigidbody _rb;
+    private AudioSource _as_Fly;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _as_Fly = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,13 @@ public class MoveController : MonoBehaviour
         || Input.GetKey(KeyCode.Space))
         {
             isFly = true;
+            if(!_as_Fly.isPlaying){
+                _as_Fly.Play();
+            }
         }else{
+            if(_as_Fly.isPlaying){
+                _as_Fly.Stop();
+            }
             isFly = false;
         }
     }
