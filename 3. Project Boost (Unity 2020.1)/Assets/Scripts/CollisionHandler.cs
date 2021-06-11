@@ -8,8 +8,9 @@ using UnityEngineInternal;
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float levelLoadDelay = 2f;
-    [SerializeField] AudioClip soundSuccess;
-    [SerializeField] AudioClip soundCrash;
+    // [SerializeField] AudioClip soundSuccess;
+    // [SerializeField] AudioClip soundCrash;
+    [SerializeField] SerializableDictionary<string, AudioClip> audioClips;
 
 
     AudioSource m_AudioSource;
@@ -27,14 +28,16 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("This thing is friendly");
                 break;
             case "Finish":
-                StartSequence("LoadNextLevel", soundSuccess);
+                // StartSequence("LoadNextLevel", soundSuccess);
+                StartSequence("LoadNextLevel", audioClips["Sound Success"]);
                 Debug.Log("Congrats, yo, you finished!");
                 break;
             case "Fuel":
                 Debug.Log("You picked up fuel");
                 break;
             default:
-                StartSequence("ReloadLevel", soundCrash);
+                // StartSequence("ReloadLevel", soundCrash);
+                StartSequence("ReloadLevel", audioClips["Sound Crash"]);
                 Debug.Log("Sorry, you blew up!");
                 break;
         }

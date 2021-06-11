@@ -10,16 +10,23 @@ public class MoveController : MonoBehaviour
     // CACHE - e.g. references for readability or speed
 
     // STATE - private instance (member) variables
-    
+    ///////////////////////////////////////////////////////
+
+    // PARAMETERS - for tuning, typically set in the editor
     [SerializeField] private float speedY = 1000f;
     [SerializeField] private float speedZ = 100f;
-    [SerializeField] private AudioClip mainEngine;
+    // [SerializeField] private AudioClip mainEngine;
+
+    // [SerializeField] List<AudioClip> audioClipList;
+    [SerializeField] SerializableDictionary<string, AudioClip> audioClips;
 
 
+    // CACHE - e.g. references for readability or speed
     private Rigidbody _rb;
     private AudioSource _as_Fly;
 
 
+    // STATE - private instance (member) variables
     private float vertical = 0f;
     private float horizontal = 0f;
 
@@ -49,7 +56,14 @@ public class MoveController : MonoBehaviour
             isFly = true;
             if (!_as_Fly.isPlaying)
             {
-                _as_Fly.PlayOneShot(mainEngine);
+                // _as_Fly.PlayOneShot(mainEngine);
+
+                // Analogue with List
+                // _as_Fly.PlayOneShot(audioClipList[0]);
+
+                // https://wiki.unity3d.com/index.php/SerializableDictionary
+                // Analogue with Dictionary (add-on from Package Manager)
+                _as_Fly.PlayOneShot(audioClips["mainEngine"]);
             }
         }
         else
