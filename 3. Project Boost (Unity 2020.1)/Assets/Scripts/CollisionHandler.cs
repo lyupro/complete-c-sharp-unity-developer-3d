@@ -14,6 +14,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("This thing is friendly");
                 break;
             case "Finish":
+                LoadNextLevel();
                 Debug.Log("Congrats, yo, you finished!");
                 break;
             case "Fuel":
@@ -26,10 +27,20 @@ public class CollisionHandler : MonoBehaviour
         }
     }
 
+    private void LoadNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings){
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
+    }
+
     void ReloadLevel()
     {
         // SceneManager.LoadScene(0);
-        
+
         // Analogue, but more professional
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
