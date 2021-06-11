@@ -38,11 +38,15 @@ public class MoveController : MonoBehaviour
         || Input.GetKey(KeyCode.Space))
         {
             isFly = true;
-            if(!_as_Fly.isPlaying){
+            if (!_as_Fly.isPlaying)
+            {
                 _as_Fly.Play();
             }
-        }else{
-            if(_as_Fly.isPlaying){
+        }
+        else
+        {
+            if (_as_Fly.isPlaying)
+            {
                 _as_Fly.Stop();
             }
             isFly = false;
@@ -58,20 +62,21 @@ public class MoveController : MonoBehaviour
         {
             isRotate = true;
             horizontal = Input.GetAxis("Horizontal");
-        }else
+        }
+        else
         {
             isRotate = false;
         }
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
-        if(isFly)
+        if (isFly)
         {
             _rb.AddRelativeForce(Vector3.up * speedY * Time.fixedDeltaTime);
         }
 
-        if(isRotate)
+        if (isRotate)
         {
             // Freezing rotation so we can manually rotate - FIXED BUG with in contact with other objects
             _rb.freezeRotation = true;
