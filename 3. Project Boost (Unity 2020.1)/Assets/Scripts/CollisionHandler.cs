@@ -7,13 +7,19 @@ using UnityEngineInternal;
 
 public class CollisionHandler : MonoBehaviour
 {
+    // PARAMETERS - for tuning, typically set in the editor
     [SerializeField] float levelLoadDelay = 2f;
     // [SerializeField] AudioClip soundSuccess;
     // [SerializeField] AudioClip soundCrash;
     [SerializeField] SerializableDictionary<string, AudioClip> audioClips;
 
 
+    // CACHE - e.g. references for readability or speed
     AudioSource m_AudioSource;
+
+
+    // STATE - private instance (member) variables
+    bool isTransitioning = false;
 
     void Start()
     {
@@ -22,6 +28,9 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        // Prevent to StartSequence() again
+        if(isTransitioning) return;
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -45,16 +54,18 @@ public class CollisionHandler : MonoBehaviour
 
     void StartSequence(string sequenceName, AudioClip sfx)
     {
-        // TO-DO: Add SFX upon crash
+        isTransitioning = true;
+
         // TO-DO: Add Particle Effect upon success & crash
-        if(!m_AudioSource.isPlaying){
-            m_AudioSource.PlayOneShot(sfx);
-        }
+
+        m_AudioSource.Stop();
+        m_AudioSource.PlayOneShot(sfx);
+
         GetComponent<MoveController>().enabled = false;
         Invoke(sequenceName, levelLoadDelay);
     }
 
-    private void LoadNextLevel()
+    void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
