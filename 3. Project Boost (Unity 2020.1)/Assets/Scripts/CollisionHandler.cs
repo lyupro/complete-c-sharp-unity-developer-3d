@@ -11,7 +11,8 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float levelLoadDelay = 2f;
     // [SerializeField] AudioClip soundSuccess;
     // [SerializeField] AudioClip soundCrash;
-    [SerializeField] SerializableDictionary<string, AudioClip> audioClips;
+    [SerializeField] SerializableDictionary<string, AudioClip> audioDict;
+    [SerializeField] List<ParticleSystem> particlesList;
 
 
     // CACHE - e.g. references for readability or speed
@@ -38,7 +39,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Finish":
                 // StartSequence("LoadNextLevel", soundSuccess);
-                StartSequence("LoadNextLevel", audioClips["Sound Success"]);
+                StartSequence("LoadNextLevel", audioDict["Sound Success"], particlesList[0]);
                 Debug.Log("Congrats, yo, you finished!");
                 break;
             case "Fuel":
@@ -46,20 +47,28 @@ public class CollisionHandler : MonoBehaviour
                 break;
             default:
                 // StartSequence("ReloadLevel", soundCrash);
-                StartSequence("ReloadLevel", audioClips["Sound Crash"]);
+                StartSequence("ReloadLevel", audioDict["Sound Crash"], particlesList[1]);
                 Debug.Log("Sorry, you blew up!");
                 break;
         }
     }
 
-    void StartSequence(string sequenceName, AudioClip sfx)
+    void StartSequence(string sequenceName, AudioClip sfx, ParticleSystem vfx)
     {
         isTransitioning = true;
 
         // TO-DO: Add Particle Effect upon success & crash
 
-        m_AudioSource.Stop();
+        if (m_AudioSource.isPlaying)
+        {
+            m_AudioSource.Stop();
+        }
         m_AudioSource.PlayOneShot(sfx);
+
+        if(vfx.isPlaying){
+            vfx.Stop();
+        }
+        vfx.Play();
 
         GetComponent<MoveController>().enabled = false;
         Invoke(sequenceName, levelLoadDelay);
