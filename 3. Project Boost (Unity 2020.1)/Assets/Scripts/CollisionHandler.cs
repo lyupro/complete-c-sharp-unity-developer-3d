@@ -12,7 +12,7 @@ public class CollisionHandler : MonoBehaviour
     // [SerializeField] AudioClip soundSuccess;
     // [SerializeField] AudioClip soundCrash;
     [SerializeField] SerializableDictionary<string, AudioClip> audioDict;
-    [SerializeField] List<ParticleSystem> particlesList;
+    [SerializeField] SerializableDictionary<string, ParticleSystem> particlesDict;
 
 
     // CACHE - e.g. references for readability or speed
@@ -39,7 +39,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Finish":
                 // StartSequence("LoadNextLevel", soundSuccess);
-                StartSequence("LoadNextLevel", audioDict["Sound Success"], particlesList[0]);
+                StartSequence("LoadNextLevel", audioDict["Sound Success"], particlesDict["Particle Success"]);
                 Debug.Log("Congrats, yo, you finished!");
                 break;
             case "Fuel":
@@ -47,7 +47,7 @@ public class CollisionHandler : MonoBehaviour
                 break;
             default:
                 // StartSequence("ReloadLevel", soundCrash);
-                StartSequence("ReloadLevel", audioDict["Sound Crash"], particlesList[1]);
+                StartSequence("ReloadLevel", audioDict["Sound Crash"], particlesDict["Particle Crash"]);
                 Debug.Log("Sorry, you blew up!");
                 break;
         }
