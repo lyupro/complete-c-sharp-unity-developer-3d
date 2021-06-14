@@ -19,6 +19,7 @@ public class MoveController : MonoBehaviour
 
     // [SerializeField] List<AudioClip> audioClipList;
     [SerializeField] SerializableDictionary<string, AudioClip> audioClips;
+    [SerializeField] SerializableDictionary<string, ParticleSystem> particlesDict;
 
 
     // CACHE - e.g. references for readability or speed
@@ -65,14 +66,24 @@ public class MoveController : MonoBehaviour
                 // Analogue with Dictionary (add-on from Package Manager)
                 _as_Fly.PlayOneShot(audioClips["mainEngine"]);
             }
+
+            if (!particlesDict["mainEngine"].isPlaying)
+            {
+                particlesDict["mainEngine"].Play();
+            }
         }
         else
         {
+            isFly = false;
             if (_as_Fly.isPlaying)
             {
                 _as_Fly.Stop();
             }
-            isFly = false;
+
+            if (particlesDict["mainEngine"].isPlaying)
+            {
+                particlesDict["mainEngine"].Stop();
+            }
         }
     }
 
@@ -85,9 +96,29 @@ public class MoveController : MonoBehaviour
         {
             isRotate = true;
             horizontal = Input.GetAxis("Horizontal");
+
+            if(horizontal > 0){
+                if (!particlesDict["thrusterLeft"].isPlaying)
+                {
+                    particlesDict["thrusterLeft"].Play();
+                }
+            }else if(horizontal < 0){
+                if (!particlesDict["thrusterRight"].isPlaying)
+                {
+                    particlesDict["thrusterRight"].Play();
+                }
+            }
         }
         else
         {
+            if (particlesDict["thrusterLeft"].isPlaying)
+            {
+                particlesDict["thrusterLeft"].Stop();
+            }else if (particlesDict["thrusterRight"].isPlaying)
+            {
+                particlesDict["thrusterRight"].Stop();
+            }
+
             isRotate = false;
         }
     }
